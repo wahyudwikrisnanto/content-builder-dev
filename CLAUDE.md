@@ -43,6 +43,22 @@ Write component-driven, reusable, DRY Vue code.
 - Type props, emits, and composable returns explicitly — don't rely on inferred `any`.
 - No copy-pasted blocks of three or more similar lines across files; factor them out.
 
+## Naming
+
+- Names must read clearly on their own — no cryptic abbreviations to save keystrokes (`btn`, `cfg`, `idx` when a loop needs it are fine; `elCfgMgr`, `hndlr`, `tgt` are not).
+- Prefer a few extra characters over ambiguity: `selectedElement` not `selEl`, `isVisible` not `vis`.
+- Booleans read as a question: `is`/`has`/`should`/`can` prefix (`isEditing`, `hasParent`).
+- Functions are verbs describing the action: `clampPos`, `resolveVisibleSections` — not `posUtil`, `doStuff`.
+- Composables: `use<Thing>` (`useCms`, `useAutoSize`), matching Vue convention.
+- Components: multi-word PascalCase describing what they render (`ColorInput.vue`, `SearchableSelect.vue`), not generic (`Item.vue`, `Box.vue`) unless truly generic.
+- Single-letter names only for tight, obvious loop/index variables (`i`, `e` for event) — never for anything holding domain data.
+
+## Comments
+
+- Write inline comments only for non-obvious WHY (hidden constraint, workaround, subtle invariant) — not WHAT the code does.
+- Keep comments short: one line, direct. No multi-line blocks, no restating the code.
+- Skip the comment if removing it wouldn't confuse a reader.
+
 ## Development Notes
 
 - Treat `app/` as an external repository with its own history because it is a submodule.
