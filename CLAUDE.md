@@ -30,6 +30,19 @@ npm run typecheck
 npm run preview
 ```
 
+## Code Architecture
+
+Write component-driven, reusable, DRY Vue code.
+
+- Split UI into small, single-responsibility components. If a component handles more than one concern, break it up.
+- Before adding new markup or logic, check for an existing component/composable that already does it. Reuse or extend instead of duplicating.
+- Extract shared logic (state, computed values, side effects) into composables (`use*.ts`) rather than repeating it across components.
+- Extract repeated markup/style patterns into reusable components rather than copy-pasting.
+- Keep components generic via props/slots/emits when the same UI shape appears in multiple places, instead of forking near-identical components.
+- Prefer composition (composables, slots, provide/inject) over prop-drilling or inheritance-style duplication.
+- Type props, emits, and composable returns explicitly — don't rely on inferred `any`.
+- No copy-pasted blocks of three or more similar lines across files; factor them out.
+
 ## Development Notes
 
 - Treat `app/` as an external repository with its own history because it is a submodule.
@@ -39,18 +52,18 @@ npm run preview
 
 ## Commit Format
 
-Use this commit format:
+Format: `<type>(<scope>): <short desc>`
+
+- `type`: `feat`, `fix`, `refactor`, `docs`, `chore`, `test` — pick the one matching the actual change.
+- `scope`: module/area touched (e.g. `editor`, `submodule`, `docs`).
+- `short desc`: imperative mood, lowercase, no trailing period, ≤50 chars.
+
+Add a body only when the "why" isn't obvious from the diff. Blank line, then body:
 
 ```text
-feat(module): short desc
-```
+<type>(<scope>): <short desc>
 
-If extra explanation is needed, add a blank line and then the longer description:
-
-```text
-feat(module): short desc
-
-Longer description when needed.
+<body: why this change, not what it does>
 ```
 
 Examples:
@@ -63,4 +76,8 @@ feat(editor): add nested frame selection
 feat(submodule): add content-builder app
 
 Register the Vue content builder repository as the app submodule.
+```
+
+```text
+fix(canvas): correct zoom offset on resize
 ```
